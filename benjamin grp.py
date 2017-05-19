@@ -4,17 +4,21 @@ Type "copyright", "credits" or "license()" for more information.
 #REG NO: 16/U/229
 #STUDENT NO:216000019
 #COMPUTER ENGINEERING YEAR 1
-#----------------------------
+
 #NAME:ATUHEREZA SARAH
-#REG NO: 16/U/
-#STUDENT NO:2160000
+#REG NO: 16/U/35
+#STUDENT NO:216001552
 #COMPUTER ENGINEERING YEAR 1
-#----------------------------
+
 #NAME:NAKALEMBE AGNES 
-#REG NO:16/U/ 
-#STUDENT NO:216
+#REG NO:16/U/811 
+#STUDENT NO:216001305
 #COMPUTER ENGINEERING YEAR 1
-#------------------------------
+
+#NAME:KYOMUHENDO ESTHER DIANA 
+#REG NO:16/U/516 
+#STUDENT NO:
+#COMPUTER ENGINEERING YEAR 1
 
 # 1 - Importing library
 import pygame
@@ -73,13 +77,13 @@ while running:
     screen.blit(castle,(0,135))
     screen.blit(castle,(0,240))
     screen.blit(castle,(0,345 ))
-    # 6.1 - Set player position and rotation
+    # 6.1 - Settting the player's position and rotation
     position = pygame.mouse.get_pos()
     angle = math.atan2(position[1]-(playerpos[1]+32),position[0]-(playerpos[0]+26))
     playerrot = pygame.transform.rotate(player, 360-angle*57.29)
     playerpos1 = (playerpos[0]-playerrot.get_rect().width/2, playerpos[1]-playerrot.get_rect().height/2)
     screen.blit(playerrot, playerpos1) 
-    # 6.2 - Draw arrows
+    # 6.2 - Drawing arrows and weapons
     for bullet in arrows:
         index=0
         velx=math.cos(bullet[0])*10
@@ -92,7 +96,7 @@ while running:
         for projectile in arrows:
             arrow1 = pygame.transform.rotate(arrow, 360-projectile[0]*57.29)
             screen.blit(arrow1, (projectile[1], projectile[2]))
-    # 6.3 - Draw badgers
+    # 6.3 - Drawing badgers
     if badtimer==0:
         badguys.append([640, random.randint(50,430)])
         badtimer=100-(badtimer1*2)
@@ -105,7 +109,7 @@ while running:
         if badguy[0]<-64:
             badguys.pop(index)
         badguy[0]-=7
-        # 6.3.1 - Attack castle
+        # 6.3.1 - Attacking castle
         badrect=pygame.Rect(badguyimg.get_rect())
         badrect.top=badguy[1]
         badrect.left=badguy[0]
@@ -113,7 +117,7 @@ while running:
             hit.play()
             healthvalue -= random.randint(5,20)
             badguys.pop(index)
-        #6.3.2 - Check for collisions
+        #6.3.2 - Checking for collisions
         index1=0
         for bullet in arrows:
             bullrect=pygame.Rect(arrow.get_rect())
@@ -135,15 +139,15 @@ while running:
     textRect = survivedtext.get_rect()
     textRect.topright=[635,5]
     screen.blit(survivedtext, textRect)
-    # 6.5 - Draw health bar
+    # 6.5 - Drawing health bar
     screen.blit(healthbar, (5,5))
     for health1 in range(healthvalue):
         screen.blit(health, (health1+8,8))
-    # 7 - update the screen
+    # 7 - updating the screen
     pygame.display.flip()
-    # 8 - loop through the events
+    # 8 - looping through the events
     for event in pygame.event.get():
-        # check if the event is the X button 
+        # checking if the event is the X button 
         if event.type==pygame.QUIT:
             # if it is quit the game
             pygame.quit()
@@ -172,7 +176,7 @@ while running:
             acc[1]+=1
             arrows.append([math.atan2(position[1]-(playerpos1[1]+32),position[0]-(playerpos1[0]+26)),playerpos1[0]+32,playerpos1[1]+32])
                 
-    # 9 - Move player
+    # 9 - Moving player
     if keys[0]:
         playerpos[1]-=5
     elif keys[2]:
@@ -182,7 +186,7 @@ while running:
     elif keys[3]:
         playerpos[0]+=5
 
-    #10 - Win/Lose check
+    #10 - Win or Loss check
     if pygame.time.get_ticks()>=90000:
         running=0
         exitcode=1
@@ -193,7 +197,7 @@ while running:
         accuracy=acc[0]*1.0/acc[1]*100
     else:
         accuracy=0
-# 11 - Win/lose display        
+# 11 - Win or loss display        
 if exitcode==0:
     pygame.font.init()
     font = pygame.font.Font(None, 24)
